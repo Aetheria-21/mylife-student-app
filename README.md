@@ -44,8 +44,6 @@ leur vie universitaire et personnelle.
 - Base de données : MySQL
 - APIs : Google OAuth, Google Calendar, WeatherAPI, Al Adhan
 
-## 🚀 Installation
-(خطوات تشغيل المشروع محلياً)
 
 ## 👥 Réalisé par
 - REJEB Ouaad
