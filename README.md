@@ -2,7 +2,7 @@
 
 Projet de Fin d'Études
 Description: Licence Appliquée en Technologie de l'Informatique, parcours Multimédia et Développement Web.
-Mention : Trés Bien.
+Mention : Très Bien.
 
 ## 📌 Description
 Application web centralisée destinée aux étudiants pour gérer 
