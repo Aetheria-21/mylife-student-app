@@ -1,0 +1,121 @@
+# Hobbies Module - Use Case Diagram (Mermaid)
+
+```mermaid
+flowchart LR
+    %% Actors
+    User([👤 User])
+
+    %% Subgraphs for better organization
+    subgraph HobbyController
+        UC1["📋 Lister hobbies"]
+        UC2["➕ Ajouter hobby"]
+        UC3["🔄 Toggle status"]
+        UC4["🗑️ Supprimer hobby"]
+        UC5["📈 Modifier niveau"]
+        UC6["⏱️ Modifier fréquence"]
+        UC7["😀 Ajouter emoji"]
+        UC8["📝 Ajouter description"]
+        UC9["📊 Voir progression"]
+        UC10["📈 Voir statistiques"]
+    end
+
+    subgraph "Hobby Model"
+        Field1["name (required)"]
+        Field2["level (1-10)"]
+        Field3["frequency (Quotidien/Semaine/Mois)"]
+        Field4["status (active/paused)"]
+        Field5["emoji"]
+        Field6["progress (0-100)"]
+        Field7["description"]
+    end
+
+    subgraph Views
+        View1["hobbies.index.blade.php"]
+        View2["Progress bars"]
+        View3["Toggle buttons"]
+        View4["Stats cards"]
+    end
+
+    %% User connections
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    User --> UC4
+    User --> UC5
+    User --> UC6
+    User --> UC7
+    User --> UC8
+    User --> UC9
+    User --> UC10
+
+    %% Controller connections
+    UC1 --> View1
+    UC2 --> Field1
+    UC3 --> Field4
+    UC5 --> Field2
+    UC6 --> Field3
+    UC7 --> Field5
+    UC8 --> Field7
+    UC9 --> Field6
+    UC10 --> View4
+
+    %% Styling
+    classDef actor fill:#f9f,stroke:#333,stroke-width:2px
+    classDef usecase fill:#bbf,stroke:#33a,stroke-width:1px
+    classDef field fill:#dfd,stroke:#383,stroke-width:1px
+
+    class User actor
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10 usecase
+    class Field1,Field2,Field3,Field4,Field5,Field6,Field7 field
+```
+
+---
+
+## Summary Table
+
+| Use Case | Route | Description |
+|----------|-------|-------------|
+| 📋 Lister hobbies | `GET /hobbies` | Display all hobbies with status & progress |
+| ➕ Ajouter hobby | `POST /hobbies` | Create new hobby (name required) |
+| 🔄 Toggle status | `PATCH /hobbies/{id}/toggle` | Switch active ↔ paused |
+| 🗑️ Supprimer hobby | `DELETE /hobbies/{id}` | Delete a hobby |
+| 📈 Modifier niveau | - | Update skill level |
+| ⏱️ Modifier fréquence | - | Set daily/weekly/monthly |
+| 😀 Ajouter emoji | - | Custom emoji icon |
+| 📝 Description | - | Detailed hobby description |
+| 📊 Progression | - | Track 0-100% progress |
+| 📈 Statistiques | - | View hobby stats |
+
+---
+
+## Model Fields
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| name | string | required | Hobby name |
+| level | string | 🎯 Débutant | Skill level |
+| frequency | string | 📅 Quotidien | Practice frequency |
+| status | string | active | active or paused |
+| emoji | string | - | Custom emoji |
+| progress | integer | 0 | 0-100% |
+| description | text | - | Details |
+
+---
+
+## Routes
+
+```
+GET     /hobbies              → index()
+POST    /hobbies              → store()
+PATCH   /hobbies/{id}/toggle  → toggle()
+DELETE  /hobbies/{id}         → destroy()
+```
+
+---
+
+## Relationships
+
+```
+User (1) ←──── (N) Hobby
+         user_id
+```

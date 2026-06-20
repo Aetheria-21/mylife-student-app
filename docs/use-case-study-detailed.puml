@@ -1,0 +1,27 @@
+@startuml Use Case - GESTION ÉTUDES DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Études" {
+  usecase "Ajouter lesson/cours" as UC1
+  usecase "Supprimer lesson" as UC2
+  usecase "Ajouter homework : titre, due_date, lesson_id" as UC3
+  usecase "Toggle homework fait/non fait" as UC4
+  usecase "Rappels automatiques due_date" as UC5
+  usecase "Lister devoirs par lesson" as UC6
+  usecase "Stats progression études" as UC7
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+
+note right of UC3 : "**StudyController**<br/>POST /study/homework"
+note bottom : "Modèles : Lesson hasMany Homework"
+@enduml
+

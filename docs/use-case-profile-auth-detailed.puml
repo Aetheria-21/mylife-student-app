@@ -1,0 +1,29 @@
+@startuml Use Case - GESTION PROFIL & AUTH DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Profil/Auth" {
+  usecase "Auth Google OAuth 2.0 (redirect/callback)" as UC1
+  usecase "Premier visit : set gender + avatar" as UC2
+  usecase "Mettre à jour profil : nom, âge, avatar" as UC3
+  usecase "Upload/changer avatar" as UC4
+  usecase "Personnaliser emotion tips (5 par émotion)" as UC5
+  usecase "Voir profil complet" as UC6
+  usecase "Settings avancés" as UC7
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+
+UC1 ..> Google : OAuth + Tokens
+
+note right of UC1 : "**GoogleAuthController**"
+note bottom : "Modèle User : google_id, token, refresh_token"
+@enduml
+

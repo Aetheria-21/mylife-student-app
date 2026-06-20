@@ -1,0 +1,21 @@
+@startuml Use Case - GESTION ÉMOTIONS DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Émotions" {
+  usecase "Sélectionner émotion courante (happy/sad/etc)" as UC1
+  usecase "Recevoir 5 conseils personnalisés (basé genre/âge)" as UC2
+  usecase "Dashboard : conseil émotion du jour" as UC3
+  usecase "Gérer tips personnalisés" as UC4
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+
+note right of UC2 : "**EmotionController**<br/>POST /analyze"
+note bottom : "Modèle UserEmotionTip"
+@enduml
+

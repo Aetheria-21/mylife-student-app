@@ -1,0 +1,23 @@
+@startuml Use Case - GESTION HOBBIES DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Hobbies" {
+  usecase "Ajouter hobby : nom, niveau (1-10), fréquence" as UC1
+  usecase "Toggle statut : active/pause" as UC2
+  usecase "Supprimer hobby" as UC3
+  usecase "Voir liste hobbies avec progression" as UC4
+  usecase "Mettre à jour niveau/fréquence" as UC5
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+
+note right of UC2 : "**HobbyController**<br/>PATCH /toggle"
+note bottom : "Modèle Hobby : status, level"
+@enduml
+

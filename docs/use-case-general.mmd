@@ -1,0 +1,81 @@
+flowchart TB
+    subgraph System["🖥️ Système MyLife"]
+        direction TB
+
+        subgraph Auth["🔐 Authentification & Profil"]
+            UC1["S'authentifier et configurer son profil"]
+        end
+
+        subgraph Dashboard["📊 Tableau de Bord"]
+            UC2["Consulter le tableau de bord personnel"]
+        end
+
+        subgraph CalendarTasks["📅 Calendrier & Tâches"]
+            UC3["Gérer son calendrier et ses événements"]
+            UC4["Gérer ses tâches et routines"]
+        end
+
+        subgraph Finance["💰 Gestion Financière"]
+            UC5["Gérer ses finances personnelles"]
+        end
+
+        subgraph Muslim["🕌 Hub Spirituel"]
+            UC6["Accéder aux ressources musulmanes"]
+        end
+
+        subgraph Career["💼 Carrière & Stages"]
+            UC7["Gérer ses candidatures et son CV"]
+        end
+
+        subgraph Study["📚 Gestion des Études"]
+            UC8["Gérer ses cours et devoirs"]
+        end
+
+        subgraph Hobbies["🎯 Loisirs"]
+            UC9["Gérer ses hobbies et passions"]
+        end
+
+        subgraph Wellness["😊 Bien-être"]
+            UC10["Analyser ses émotions et recevoir des conseils"]
+        end
+    end
+
+    %% Acteurs
+    User(["👤 Utilisateur"])
+    Google(["🔗 Google"])
+    APIs(["🌐 APIs Externes"])
+
+    %% Relations Utilisateur -> Use Cases
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    User --> UC4
+    User --> UC5
+    User --> UC6
+    User --> UC7
+    User --> UC8
+    User --> UC9
+    User --> UC10
+
+    %% Relations Includes -> Acteurs externes
+    UC1 -.->|OAuth 2.0| Google
+    UC2 -.->|Google Calendar| Google
+    UC3 -.->|Google Calendar API| Google
+    UC2 -.->|Météo| APIs
+    UC6 -.->|Aladhan & Alquran| APIs
+    UC7 -.->|Clearbit & PDF.co| APIs
+
+    %% Styles
+    style System fill:#f0f4ff,stroke:#4a6cf7,stroke-width:3px
+    style Auth fill:#fff0f0,stroke:#ff6b6b,stroke-width:2px
+    style Dashboard fill:#f0fff4,stroke:#51cf66,stroke-width:2px
+    style CalendarTasks fill:#fff9e6,stroke:#fcc419,stroke-width:2px
+    style Finance fill:#fff0f6,stroke:#f06595,stroke-width:2px
+    style Muslim fill:#e6fcf5,stroke:#20c997,stroke-width:2px
+    style Career fill:#f3f0ff,stroke:#845ef7,stroke-width:2px
+    style Study fill:#fff4e6,stroke:#ff922b,stroke-width:2px
+    style Hobbies fill:#e3fafc,stroke:#22b8cf,stroke-width:2px
+    style Wellness fill:#fff5f5,stroke:#ff8787,stroke-width:2px
+    style User fill:#e8e8e8,stroke:#333,stroke-width:2px
+    style Google fill:#fce8e6,stroke:#ea4335,stroke-width:2px
+    style APIs fill:#e8f4fd,stroke:#1a73e8,stroke-width:2px

@@ -1,0 +1,26 @@
+@startuml Use Case - GESTION HUB MUSULMAN DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Hub Musulman" {
+  usecase "Horaires prières 5x/jour (Aladhan API, Tunisie)" as UC1
+  usecase "Liste 114 sourates (Alquran API)" as UC2
+  usecase "Lire sourate #N : arabe + traduction FR" as UC3
+  usecase "Parcourir catégories Dhikr (matin/soir/etc)" as UC4
+  usecase "Lire adhkar spécifique" as UC5
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+
+UC1 ..> Aladhan : API Prayers
+UC2 ..> QuranAPI : API Sourates
+UC4 ..> DhikrDB : Seedé
+
+note right of UC1 : "**prayerController**"
+@enduml
+

@@ -1,0 +1,110 @@
+@startuml MyLife - Diagramme de Cas d'Utilisation Général (Vue d'ensemble)
+
+!theme plain
+skinparam backgroundColor #fefefe
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam linetype ortho
+skinparam wrapWidth 200
+
+title Diagramme de Cas d'Utilisation Général - MyLife (Vue d'ensemble)
+
+' ============================================
+' ACTEURS
+' ============================================
+actor "👤 Utilisateur" as User #E8E8E8
+actor "🔗 Google" as Google #FCE8E6
+actor "🌐 APIs Externes" as APIs #E8F4FD
+
+' ============================================
+' SYSTÈME
+' ============================================
+rectangle "🖥️ Système MyLife" as System {
+
+    package "🔐 Authentification & Profil" as Auth #FFF0F0 {
+        usecase "S'authentifier et configurer\nson profil" as UC_Auth
+    }
+
+    package "📊 Tableau de Bord" as Dashboard #F0FFF4 {
+        usecase "Consulter le tableau\nde bord personnel" as UC_Dash
+    }
+
+    package "📅 Calendrier & Tâches" as CalendarTasks #FFF9E6 {
+        usecase "Gérer son calendrier\net ses événements" as UC_Cal
+        usecase "Gérer ses tâches\net routines" as UC_Tasks
+    }
+
+    package "💰 Gestion Financière" as Finance #FFF0F6 {
+        usecase "Gérer ses finances\n(revenus, dépenses, dettes, souhaits)" as UC_Fin
+    }
+
+    package "🕌 Hub Spirituel" as Muslim #E6FCF5 {
+        usecase "Accéder au hub musulman\n(prières, Coran, Dhikr)" as UC_Muslim
+    }
+
+    package "💼 Carrière & Stages" as Career #F3F0FF {
+        usecase "Gérer ses candidatures\net analyser son CV" as UC_Career
+    }
+
+    package "📚 Gestion des Études" as Study #FFF4E6 {
+        usecase "Gérer ses cours\net devoirs" as UC_Study
+    }
+
+    package "🎯 Loisirs" as Hobbies #E3FAFC {
+        usecase "Gérer ses hobbies\net passions" as UC_Hobby
+    }
+
+    package "😊 Bien-être" as Wellness #FFF5F5 {
+        usecase "Analyser ses émotions\net recevoir des conseils" as UC_Emotion
+    }
+
+}
+
+' ============================================
+' LIENS UTILISATEUR -> CAS D'UTILISATION
+' ============================================
+User --> UC_Auth
+User --> UC_Dash
+User --> UC_Cal
+User --> UC_Tasks
+User --> UC_Fin
+User --> UC_Muslim
+User --> UC_Career
+User --> UC_Study
+User --> UC_Hobby
+User --> UC_Emotion
+
+' ============================================
+' LIENS INCLUDES (ACTEURS EXTERNES)
+' ============================================
+UC_Auth ..> Google : <<include>>\nOAuth 2.0
+UC_Dash ..> Google : <<include>>\nGoogle Calendar
+UC_Dash ..> APIs : <<include>>\nMétéo
+UC_Cal ..> Google : <<include>>\nGoogle Calendar API
+UC_Muslim ..> APIs : <<include>>\nAladhan & Alquran
+UC_Career ..> APIs : <<include>>\nClearbit & PDF.co
+
+' ============================================
+' NOTES
+' ============================================
+note right of User
+    **Acteur Principal**
+    L'utilisateur authentifié accède
+    à l'ensemble des modules de
+    gestion de vie personnelle.
+end note
+
+note bottom of Google
+    **Acteur Secondaire**
+    Fournit l'authentification OAuth
+    et la synchronisation calendrier.
+end note
+
+note bottom of APIs
+    **Acteurs Secondaires**
+    WeatherAPI, Aladhan, Alquran.cloud,
+    Clearbit, PDF.co
+end note
+
+@enduml
+

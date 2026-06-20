@@ -1,0 +1,35 @@
+@startuml Use Case - GESTION FINANCE DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Finance" {
+  usecase "Ajouter revenu : montant, source, date" as UC1
+  usecase "Supprimer revenu" as UC2
+  usecase "Ajouter dépense : montant, catégorie, date" as UC3
+  usecase "Supprimer dépense" as UC4
+  usecase "Ajouter dette : montant, description, statut (payée/payant)" as UC5
+  usecase "Mettre à jour dette" as UC6
+  usecase "Supprimer dette" as UC7
+  usecase "Ajouter wishlist : item, prix estim, priorité" as UC8
+  usecase "Marquer acheté (toggle purchased)" as UC9
+  usecase "Supprimer wishlist" as UC10
+  usecase "Stats : balance mensuelle/journalière, graphiques" as UC11
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+User --> UC9
+User --> UC10
+User --> UC11
+
+note right of UC11 : "**FinanceController**<br/>Calculs automatiques"
+note bottom : "Modèles : Income, Expense, Debt, Wishlist"
+@enduml
+

@@ -1,0 +1,68 @@
+@startuml Use Case - GESTION HOBBIES ULTRA-DÉTAILLÉE (User + Code Réel)
+
+!theme plain
+skinparam backgroundColor #fefefe
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title **Hobbies/Passions - 12+ Cas d'Utilisation Détailés**
+actor "👤 User Auth" as User
+
+package "🎯 HobbyController" {
+  usecase "📋 Lister hobbies (user()->hobbies()->latest())" as UC_INDEX
+  usecase "➕ Créer hobby : name(req), level(?), frequency(?)" as UC_STORE
+  usecase "🔄 Toggle status : active ↔ paused (findOrFail $id)" as UC_TOGGLE
+  usecase "🗑️ Supprimer hobby (findOrFail $id → delete)" as UC_DESTROY
+}
+
+package "🏗️ Modèle Hobby (fillable: user_id, name, level, frequency, status, emoji, progress, description)" {
+  usecase "👤 belongsTo User (user_id FK)" as UC_REL1
+  usecase "📊 Progress (cast integer 0-100)" as UC_PROGRESS
+  usecase "🔍 Scope forUser($userId)" as UC_SCOPE
+  usecase "📈 Mettre à jour niveau (1-10 : Débutant→Expert)" as UC_UPDATE_LEVEL
+  usecase "⏱️ Fréquence : Quotidien/Semaine/Mois" as UC_FREQ
+  usecase "😀 Ajouter emoji personnalisé" as UC_EMOJI
+  usecase "📝 Description détaillée" as UC_DESC
+  usecase "🎨 hasMany sous-hobbies (hiérarchique)" as UC_SUB
+}
+
+package "📱 Vue hobbies.index.blade.php" {
+  usecase "🎨 Cards responsive : nom + niveau + status + progress bar" as UC_VIEW
+  usecase "➕ Formulaire ajout (validation max:255)" as UC_FORM
+  usecase "🔘 Toggle buttons (active/paused)" as UC_BTN_TOGGLE
+  usecase "📊 Stats : nombre active/paused, avg niveau" as UC_STATS
+}
+
+' LIENS User → Actions
+User --> UC_INDEX
+User --> UC_STORE
+User --> UC_TOGGLE
+User --> UC_DESTROY
+User --> UC_UPDATE_LEVEL
+User --> UC_VIEW
+
+' Détails techniques
+UC_STORE ..> "Validation : name req, level/freq nullable" : req->validate()
+UC_TOGGLE ..> "Status flip : active→paused↔" 
+UC_REL1 ..> User : FK user_id
+
+note right of User
+  **Routes** :
+  - GET /hobbies → index()
+  - POST /hobbies → store()
+  - PATCH /hobbies/{id}/toggle
+  - DELETE /hobbies/{id}
+end note
+
+note bottom of UC_PROGRESS
+  **Casts** : progress → integer
+  **Champs** : emoji, description
+end note
+
+note top
+  **Basé sur code réel** HobbyController + Model
+  **Messages** : 'success' avec nom hobby
+end note
+
+@enduml
+

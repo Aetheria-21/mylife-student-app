@@ -1,0 +1,59 @@
+flowchart TB
+    subgraph AllGestions["🖥️ TOUTES les Gestions - MyLife"]
+        direction TB
+        
+        Auth[🔐 Auth & Profil<br/>- Login Google OAuth<br/>- Config profil<br/>- Conseils perso]
+        
+        Dash[📊 Dashboard<br/>- Widgets calend/météo<br/>- Stats tâches<br/>- Conseils jour]
+        
+        Cal[📅 Calendrier<br/>- CRUD événements<br/>- Sync Google]
+        
+        Tasks[📋 Tâches<br/>- CRUD + statut/priorité<br/>- Catégories 11+<br/>- Tâches ménage]
+        
+        Finance[💰 Finance<br/>- Revenus/ Dépenses CRUD<br/>- Dettes CRUD<br/>- Wishlist CRUD<br/>- Stats mensuelles]
+        
+        Muslim[🕌 Musulman<br/>- Prières Aladhan<br/>- Coran 114 sourates<br/>- Dhikr catégories]
+        
+        Career[💼 Carrière<br/>- Stages CRUD<br/>- Recherche Clearbit<br/>- Analyse CV PDF.co]
+        
+        Study[📚 Études<br/>- Lessons CRUD<br/>- Homework + rappels]
+        
+        Hobbies[🎯 Hobbies<br/>- CRUD + statut/niveau]
+        
+        Emotions[😊 Émotions<br/>- Analyse + 5 conseils]
+    end
+    
+    User(["👤 Utilisateur"]) --> Dash
+    Dash --> Auth
+    Dash --> Cal
+    Dash --> Tasks
+    Dash --> Finance
+    Dash --> Muslim
+    Dash --> Career
+    Dash --> Study
+    Dash --> Hobbies
+    Dash --> Emotions
+    
+    Auth -.-> Google["🔗 Google"]
+    Cal -.-> Google
+    Muslim -.-> Aladhan["🕌 Aladhan"]
+    Muslim -.-> Quran["📖 Alquran"]
+    Career -.-> Clearbit["🏢 Clearbit"]
+    Career -.-> PDFco["📄 PDF.co"]
+    Dash -.-> Weather["🌤️ Weather"]
+    
+    classDef module fill:#f0f4ff,stroke:#4a6cf7,stroke-width:2px
+    classDef user fill:#e8e8e8,stroke:#333
+    classDef api fill:#e8f4fd,stroke:#1a73e8
+    
+    style Auth fill:#fff0f0,stroke:#ff6b6b
+    style Dash fill:#f0fff4,stroke:#51cf66
+    style Cal fill:#fff9e6,stroke:#fcc419
+    style Tasks fill:#e7f5ff,stroke:#339af0
+    style Finance fill:#fff0f6,stroke:#f06595
+    style Muslim fill:#e6fcf5,stroke:#20c997
+    style Career fill:#f3f0ff,stroke:#845ef7
+    style Study fill:#fff4e6,stroke:#ff922b
+    style Hobbies fill:#e3fafc,stroke:#22b8cf
+    style Emotions fill:#fff5f5,stroke:#ff8787
+

@@ -1,0 +1,38 @@
+@startuml Diagramme de Cas d'Utilisation - HOBBIES UNIQUEMENT
+
+skinparam actorStyle awesome
+skinparam monochrome true
+skinparam shadowing false
+
+actor "👤 UTILISATEUR" as User
+
+rectangle "SYSTÈME HOBBIES" {
+  (Lister mes hobbies)
+  (Ajouter un nouveau hobby)
+  (Activer un hobby)
+  (Mettre en pause un hobby)
+  (Supprimer un hobby)
+  (Modifier le niveau d'un hobby)
+  (Modifier la fréquence)
+  (Ajouter emoji au hobby)
+  (Ajouter description)
+  (Voir progression du hobby)
+  (Voir statistiques hobbies)
+  (Filtrer hobbies actifs/pausés)
+}
+
+User -right-> (Lister mes hobbies)
+User -right-> (Ajouter un nouveau hobby)
+User -right-> (Activer un hobby)
+User -right-> (Mettre en pause un hobby)
+User -right-> (Supprimer un hobby)
+User -right-> (Modifier le niveau d'un hobby)
+User -right-> (Modifier la fréquence)
+User -right-> (Voir statistiques hobbies)
+
+note right of (Ajouter un nouveau hobby) : name (obligatoire)<br/>level, frequency (optionnels)
+note right of (Activer un hobby) : toggle status<br/>(active ↔ paused)
+note bottom : "**HobbiesController**<br/>Routes : GET/POST/PATCH/DELETE"
+
+@enduml
+

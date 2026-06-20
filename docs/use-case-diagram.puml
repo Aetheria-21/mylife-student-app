@@ -1,0 +1,197 @@
+@startuml MyLife - Diagramme de Cas d'Utilisation Général
+
+!theme plain
+skinparam backgroundColor #fefefe
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+title Diagramme de Cas d'Utilisation Général - MyLife
+
+' ============================================
+' ACTEURS
+' ============================================
+actor "👤 Utilisateur" as User #E8E8E8
+actor "🔗 Google" as Google #FCE8E6
+actor "🌤️ WeatherAPI" as WeatherAPI #E8F4FD
+actor "🕌 API Aladhan" as Aladhan #E6F5E6
+actor "📖 API Alquran.cloud" as Alquran #FFF8E1
+actor "🏢 API Clearbit" as Clearbit #F3E5F5
+actor "📄 API PDF.co" as PDFco #FFEBEE
+
+' ============================================
+' PACKAGES / SOUS-SYSTÈMES
+' ============================================
+package "🔐 Authentification" as Auth #FFF0F0 {
+    usecase "Se connecter via Google" as UC1
+    usecase "Configurer le profil\n(genre, avatar, nom, âge)" as UC2
+    usecase "Personnaliser les conseils\némotionnels" as UC3
+}
+
+package "📊 Tableau de Bord" as Dashboard #F0FFF4 {
+    usecase "Visualiser le calendrier Google" as UC4
+    usecase "Consulter la météo\n(Tunisie)" as UC5
+    usecase "Voir la progression\ndes tâches" as UC6
+    usecase "Recevoir des conseils\némotionnels" as UC7
+}
+
+package "📅 Calendrier" as Calendar #FFF9E6 {
+    usecase "Créer un événement" as UC8
+    usecase "Modifier un événement" as UC9
+    usecase "Supprimer un événement" as UC10
+}
+
+package "📋 Gestion des Tâches" as Tasks #E7F5FF {
+    usecase "Créer une tâche" as UC11
+    usecase "Modifier le statut\nd'une tâche" as UC12
+    usecase "Supprimer une tâche" as UC13
+    usecase "Filtrer les tâches\npar catégorie" as UC14
+    usecase "Gérer les tâches\nde ménage" as UC15
+}
+
+package "💰 Gestion Financière" as Finance #FFF0F6 {
+    usecase "Ajouter un revenu" as UC16
+    usecase "Supprimer un revenu" as UC17
+    usecase "Ajouter une dépense" as UC18
+    usecase "Supprimer une dépense" as UC19
+    usecase "Ajouter une dette" as UC20
+    usecase "Mettre à jour une dette" as UC21
+    usecase "Supprimer une dette" as UC22
+    usecase "Ajouter à la liste\nde souhaits" as UC23
+    usecase "Marquer un souhait\ncomme acheté" as UC24
+    usecase "Supprimer un souhait" as UC25
+    usecase "Consulter les statistiques\nfinancières" as UC26
+}
+
+package "🕌 Hub Musulman" as Muslim #E6FCF5 {
+    usecase "Consulter les horaires\nde prière" as UC27
+    usecase "Lire le Coran\n(liste des sourates)" as UC28
+    usecase "Lire une sourate\n(arabe + traduction)" as UC29
+    usecase "Consulter les Adhkar\n(Dhikr)" as UC30
+    usecase "Parcourir les catégories\nde Dhikr" as UC31
+}
+
+package "💼 Carrière & Stages" as Career #F3F0FF {
+    usecase "Ajouter une candidature\nde stage" as UC32
+    usecase "Modifier une candidature" as UC33
+    usecase "Supprimer une candidature" as UC34
+    usecase "Rechercher une entreprise\n(Clearbit)" as UC35
+    usecase "Analyser un CV\n(PDF.co)" as UC36
+    usecase "Voir le parcours de\ncarrière suggéré" as UC37
+}
+
+package "📚 Gestion des Études" as Study #FFF4E6 {
+    usecase "Ajouter un cours" as UC38
+    usecase "Supprimer un cours" as UC39
+    usecase "Ajouter un devoir" as UC40
+    usecase "Marquer un devoir\ncomme fait" as UC41
+    usecase "Recevoir des rappels\nde devoirs" as UC42
+}
+
+package "🎯 Loisirs" as Hobbies #E3FAFC {
+    usecase "Ajouter un hobby/passion" as UC43
+    usecase "Activer/Pause un hobby" as UC44
+    usecase "Supprimer un hobby" as UC45
+}
+
+package "😊 Émotions" as Emotions #FFF5F5 {
+    usecase "Analyser son émotion" as UC46
+    usecase "Recevoir des conseils\npersonnalisés" as UC47
+}
+
+' ============================================
+' LIENS UTILISATEUR -> CAS D'UTILISATION
+' ============================================
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+User --> UC9
+User --> UC10
+User --> UC11
+User --> UC12
+User --> UC13
+User --> UC14
+User --> UC15
+User --> UC16
+User --> UC17
+User --> UC18
+User --> UC19
+User --> UC20
+User --> UC21
+User --> UC22
+User --> UC23
+User --> UC24
+User --> UC25
+User --> UC26
+User --> UC27
+User --> UC28
+User --> UC29
+User --> UC30
+User --> UC31
+User --> UC32
+User --> UC33
+User --> UC34
+User --> UC35
+User --> UC36
+User --> UC37
+User --> UC38
+User --> UC39
+User --> UC40
+User --> UC41
+User --> UC42
+User --> UC43
+User --> UC44
+User --> UC45
+User --> UC46
+User --> UC47
+
+' ============================================
+' LIENS SYSTÈME -> ACTEURS EXTERNES
+' ============================================
+UC1 ..> Google : <<include>>\nOAuth 2.0
+UC4 ..> Google : <<include>>\nAPI Calendar
+UC8 ..> Google : <<include>>\nAPI Calendar
+UC9 ..> Google : <<include>>\nAPI Calendar
+UC10 ..> Google : <<include>>\nAPI Calendar
+UC5 ..> WeatherAPI : <<include>>\nAPI météo
+UC27 ..> Aladhan : <<include>>\nAPI prières
+UC28 ..> Alquran : <<include>>\nAPI Coran
+UC29 ..> Alquran : <<include>>\nAPI Coran
+UC35 ..> Clearbit : <<include>>\nAPI entreprise
+UC36 ..> PDFco : <<include>>\nAPI PDF
+
+' ============================================
+' NOTES
+' ============================================
+note right of User
+    **Acteur Principal**
+    L'utilisateur authentifié
+    peut accéder à toutes les
+    fonctionnalités du système.
+end note
+
+note bottom of Google
+    **Acteur Secondaire**
+    Fournit l'authentification OAuth
+    et la synchronisation du calendrier.
+end note
+
+note bottom of Finance
+    **Module Finance**
+    Gestion complète des revenus,
+    dépenses, dettes et liste de souhaits
+    avec statistiques mensuelles/journalières.
+end note
+
+note bottom of Muslim
+    **Hub Musulman**
+    Fonctionnalités religieuses :
+    prières, Coran, Dhikr.
+end note
+
+@enduml
+

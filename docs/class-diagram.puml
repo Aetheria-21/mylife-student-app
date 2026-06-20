@@ -1,0 +1,159 @@
+@startuml
+title Diagramme de classes - MyLife (modèles Eloquent)
+
+skinparam classAttributeIconSize 0
+hide methods
+hide stereotypes
+
+class "User" as User {
+  +id
+  +name
+  +email
+  +password
+  +age
+  +gender
+  +avatar
+  +google_id
+  +google_token
+  +google_refresh_token
+  +has_visited_welcome
+}
+
+class "Task" as Task {
+  +id
+  +user_id
+  +title
+  +description
+  +category
+  +priority
+  +status
+  +due_date
+  +completed_at
+  +iconFor(category)
+}
+
+class "Hobby" as Hobby {
+  +id
+  +user_id
+  +name
+  +level
+  +frequency
+  +status
+  +emoji
+  +progress
+  +description
+}
+
+class "Internship" as Internship {
+  +id
+  +company
+  +position
+  +date_applied
+  +response_date
+  +status
+  +user_id
+}
+
+class "UserEmotionTip" as UserEmotionTip {
+  +id
+  +user_id
+  +emotion
+  +tip_order
+  +tip_text
+  +defaultTips()
+}
+
+class "Income" as Income {
+  +id
+  +user_id
+  +source
+  +amount
+  +date
+  +description
+  +category
+}
+
+class "Expense" as Expense {
+  +id
+  +user_id
+  +name
+  +amount
+  +date
+  +description
+  +category
+}
+
+class "Debt" as Debt {
+  +id
+  +user_id
+  +creditor
+  +total_amount
+  +paid_amount
+  +due_date
+  +description
+  +status
+  +getRemainingAmountAttribute()
+}
+
+class "Wishlist" as Wishlist {
+  +id
+  +user_id
+  +item_name
+  +price
+  +priority
+  +description
+  +url
+  +purchased
+  +purchased_date
+}
+
+class "Lesson" as Lesson {
+  +id
+  +user_id
+  +title
+  +description
+  +date
+  +homeworks()
+  +user()
+}
+
+class "Homework" as Homework {
+  +id
+  +lesson_id
+  +user_id
+  +title
+  +is_done
+  +due_date
+  +remind_at
+  +user()
+}
+
+class "Dhikr" as Dhikr {
+  +category
+  +text
+  +translation
+  +audio
+  +repeat
+}
+
+' =========================
+' Relations (Eloquent)
+' =========================
+
+User "1" -- "N" Task : tasks()
+User "1" -- "N" Hobby : hobbies()
+User "1" -- "N" Internship : internships (via user_id)
+User "1" -- "N" UserEmotionTip : emotionTips()
+User "1" -- "N" Income : incomes (via user_id)
+User "1" -- "N" Expense : expenses (via user_id)
+User "1" -- "N" Debt : debts (via user_id)
+User "1" -- "N" Wishlist : wishlists (via user_id)
+
+User "1" -- "N" Lesson : lessons (via user_id)
+User "1" -- "N" Homework : homeworks (via user_id)
+
+Lesson "1" -- "N" Homework : homeworks()
+Homework "N" -- "1" Lesson : lesson()
+
+@enduml
+

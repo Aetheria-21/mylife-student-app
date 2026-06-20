@@ -1,0 +1,29 @@
+@startuml Use Case - GESTION CARRIÈRE/STAGES DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Carrière" {
+  usecase "Ajouter stage : entreprise, poste, statut" as UC1
+  usecase "Modifier stage" as UC2
+  usecase "Supprimer stage" as UC3
+  usecase "Rechercher entreprise (Clearbit API)" as UC4
+  usecase "Analyser CV PDF (PDF.co API)" as UC5
+  usecase "Voir parcours suggéré (basé sur skills)" as UC6
+  usecase "Lister candidatures par statut" as UC7
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+
+UC4 ..> Clearbit : API
+UC5 ..> PDFco : API
+
+note right of UC4 : "**InternshipController**<br/>GET company-search"
+@enduml
+

@@ -1,0 +1,132 @@
+@startuml MyLife - Cas d'Utilisation DÉTAILLÉS par Gestion/Module
+
+!theme plain
+skinparam backgroundColor #fefefe
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam linetype ortho
+skinparam wrapWidth 220
+
+title **TOUS les Cas d'Utilisation - Groupés par Gestion**
+
+actor "👤 Utilisateur" as User
+actor "🔗 Google" as Google
+actor "🌐 APIs" as APIs
+
+rectangle "🖥️ MyLife - Toutes les Gestions" {
+
+  ' === GESTION AUTH & PROFIL ===
+  package "🔐 Authentification & Profil" #FFF0F0 {
+    usecase "Se connecter via Google OAuth" as UC_AUTH1
+    usecase "Configurer profil (nom, âge, genre, avatar)" as UC_AUTH2
+    usecase "Personnaliser conseils émotionnels (5 par émotion)" as UC_AUTH3
+    usecase "Mettre à jour paramètres (welcome visited)" as UC_AUTH4
+  }
+
+  ' === GESTION TABLEAU DE BORD ===
+  package "📊 Dashboard Central" #F0FFF4 {
+    usecase "Voir dashboard avec widgets" as UC_DASH1
+    usecase "Calendrier Google synchronisé" as UC_DASH2
+    usecase "Météo Tunisie (WeatherAPI)" as UC_DASH3
+    usecase "Stats tâches/progression" as UC_DASH4
+    usecase "Conseils émotionnels du jour" as UC_DASH5
+  }
+
+  ' === GESTION CALENDRIER ===
+  package "📅 Calendrier Événements" #FFF9E6 {
+    usecase "CRUD événements (Create/Read/Update/Delete)" as UC_CAL1
+    usecase "Synchroniser avec Google Calendar API" as UC_CAL2
+  }
+
+  ' === GESTION TÂCHES ===
+  package "📋 Tâches & Routines" #E7F5FF {
+    usecase "Créer tâche (titre, desc, cat, priorité, date)" as UC_TASK1
+    usecase "Modifier statut (todo/in-progress/done)" as UC_TASK2
+    usecase "Supprimer tâche" as UC_TASK3
+    usecase "Filtrer par catégorie/priorité" as UC_TASK4
+    usecase "CRUD tâches ménage (CleanTask)" as UC_TASK5
+    usecase "Répétition/routines" as UC_TASK6
+  }
+
+  ' === GESTION FINANCE ===
+  package "💰 Finance Complète" #FFF0F6 {
+    usecase "Ajouter revenu (montant, source, date)" as UC_FIN1
+    usecase "Supprimer revenu" as UC_FIN2
+    usecase "Ajouter dépense (montant, cat, date)" as UC_FIN3
+    usecase "Supprimer dépense" as UC_FIN4
+    usecase "Ajouter dette (montant, desc, statut)" as UC_FIN5
+    usecase "Mettre à jour dette" as UC_FIN6
+    usecase "Supprimer dette" as UC_FIN7
+    usecase "Ajouter wishlist (item, prix)" as UC_FIN8
+    usecase "Marquer acheté wishlist" as UC_FIN9
+    usecase "Supprimer wishlist" as UC_FIN10
+    usecase "Voir stats (mensuelles/journalières)" as UC_FIN11
+  }
+
+  ' === GESTION MUSULMAN ===
+  package "🕌 Hub Musulman" #E6FCF5 {
+    usecase "Horaires prières (Aladhan API, Tunisie)" as UC_MUS1
+    usecase "Liste sourates Coran (Alquran API)" as UC_MUS2
+    usecase "Lire sourate (arabe + FR)" as UC_MUS3
+    usecase "Parcourir catégories Dhikr/Adhkar" as UC_MUS4
+    usecase "Lire Dhikr spécifique" as UC_MUS5
+  }
+
+  ' === GESTION CARRIÈRE ===
+  package "💼 Stages & CV" #F3F0FF {
+    usecase "Ajouter candidature stage (entreprise, poste)" as UC_CAR1
+    usecase "Modifier candidature" as UC_CAR2
+    usecase "Supprimer candidature" as UC_CAR3
+    usecase "Rechercher entreprise (Clearbit API)" as UC_CAR4
+    usecase "Analyser CV (PDF.co API)" as UC_CAR5
+    usecase "Voir parcours carrière suggéré" as UC_CAR6
+  }
+
+  ' === GESTION ÉTUDES ===
+  package "📚 Études & Devoirs" #FFF4E6 {
+    usecase "Ajouter cours/lesson" as UC_ETU1
+    usecase "Supprimer cours" as UC_ETU2
+    usecase "Ajouter devoir/homework (titre, date écheance)" as UC_ETU3
+    usecase "Marquer devoir fait" as UC_ETU4
+    usecase "Rappels devoirs (due_date)" as UC_ETU5
+  }
+
+  ' === GESTION HOBBIES ===
+  package "🎯 Hobbies/Passions" #E3FAFC {
+    usecase "Ajouter hobby (nom, niveau, fréquence)" as UC_HOB1
+    usecase "Activer/Pause hobby" as UC_HOB2
+    usecase "Supprimer hobby" as UC_HOB3
+  }
+
+  ' === GESTION ÉMOTIONS ===
+  package "😊 Bien-être Émotionnel" #FFF5F5 {
+    usecase "Analyser émotion courante" as UC_EMO1
+    usecase "Recevoir 5 conseils personnalisés" as UC_EMO2
+  }
+}
+
+' Liens Utilisateur
+User --> UC_AUTH1 : principal
+User --> UC_DASH1
+User --> UC_CAL1
+User --> UC_TASK1
+User --> UC_FIN1
+User --> UC_MUS1
+User --> UC_CAR1
+User --> UC_ETU1
+User --> UC_HOB1
+User --> UC_EMO1
+
+' Includes Externes
+UC_AUTH1 ..> Google : <<include>> OAuth
+UC_CAL1 ..> Google : <<include>> Calendar API
+UC_DASH3 ..> APIs : <<include>> WeatherAPI
+UC_MUS1 ..> APIs : <<include>> Aladhan
+UC_MUS2 ..> APIs : <<include>> Alquran.cloud
+UC_CAR4 ..> APIs : <<include>> Clearbit
+UC_CAR5 ..> APIs : <<include>> PDF.co
+
+note top : "**TOTAL : 40+ Cas d'Utilisation**\n**Couverture 100%** de toutes les gestions"
+note bottom : "Chaque gestion suit CRUD + stats/filtres.\nDashboard centralise l'accès."
+@enduml
+

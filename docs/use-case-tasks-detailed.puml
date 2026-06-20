@@ -1,0 +1,30 @@
+@startuml Use Case - GESTION TÂCHES DÉTAILLÉE
+!theme plain
+skinparam actorStyle awesome
+
+actor "👤 User" as User
+rectangle "Gestion Tâches" {
+  usecase "Créer tâche : titre, description, catégorie (11 types), priorité (low/medium/high), due_date, repeat" as UC1
+  usecase "Lister toutes tâches filtrées : catégorie, priorité, statut, date" as UC2
+  usecase "Modifier statut : todo → in-progress → done" as UC3
+  usecase "Modifier tâche complète (update)" as UC4
+  usecase "Supprimer tâche" as UC5
+  usecase "Toggle tâches ménage (CleanTask)" as UC6
+  usecase "Voir stats : progression par catégorie" as UC7
+  usecase "Dashboard : vue rapide tâches jour/semaine" as UC8
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+
+note right of UC1 : "**TaskController**<br/>POST /tasks"
+note right of UC2 : "**TaskController**<br/>GET /tasks"
+note bottom : "11 catégories : study, work, chores, spiritual, etc."
+@enduml
+
